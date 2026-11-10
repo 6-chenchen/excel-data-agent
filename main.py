@@ -1,6 +1,6 @@
 import pandas as pd
 from pathlib import Path
-
+from tools.data_analysis import get_data_overview
 def load_data(file_path):
     """
     读取 CSV 或 Excel 文件。
@@ -41,5 +41,9 @@ def load_data(file_path):
 
 
 if __name__ == "__main__":
+    
     file_path = "data/sales.csv"
     data = load_data(file_path)
+    result=get_data_overview(data)
+    print("\n数据概览：")
+    print(result)
