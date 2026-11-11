@@ -1,6 +1,6 @@
 import pandas as pd
 from pathlib import Path
-from tools.data_analysis import get_data_overview
+from tools.data_analysis import get_data_overview,calculate_column_stats
 def load_data(file_path):
     """
     读取 CSV 或 Excel 文件。
@@ -46,4 +46,7 @@ if __name__ == "__main__":
     data = load_data(file_path)
     result=get_data_overview(data)
     print("\n数据概览：")
+    print(result)
+    result=calculate_column_stats(data,"销售额")
+    print("\n销售额统计：")
     print(result)
