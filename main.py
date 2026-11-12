@@ -1,6 +1,7 @@
 import pandas as pd
 from pathlib import Path
-from tools.data_analysis import get_data_overview,calculate_column_stats
+from tools.data_analysis import get_data_overview,calculate_column_stats,group_by_column,get_top_n
+
 def load_data(file_path):
     """
     读取 CSV 或 Excel 文件。
@@ -50,3 +51,21 @@ if __name__ == "__main__":
     result=calculate_column_stats(data,"销售额")
     print("\n销售额统计：")
     print(result)
+    result=group_by_column(data,"商品","销售额")
+    print("\n按商品分组销售额总和：")
+    print(result)
+    result=get_top_n(data,"销售额",3)
+    print("\n销售额前3名：")
+    print(result)
+    try:
+        result=get_top_n(data,"销售额",-3)
+        print("\n销售额后3名：")
+        print(result)
+    except ValueError as e:
+        print(f"错误：{e}")
+    try:
+        result=get_top_n(data,"nihao",3)
+        print("\nnihao前3名：")
+        print(result)
+    except ValueError as e:
+        print(f"错误：{e}")
