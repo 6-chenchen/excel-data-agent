@@ -19,10 +19,10 @@ def calculate_column_stats(df,column):
     max_value=df[column].max()
     min_value=df[column].min()
     sum_value=df[column].sum()
-    return {"平均数":average,
-            "最大值":max_value,
-            "最小值":min_value,
-            "总和":sum_value}
+    return {"平均数":float(average),#便于JSON序列化
+            "最大值":float(max_value),
+            "最小值":float(min_value),
+            "总和":float(sum_value)}
 
 def group_by_column(df,group_column,value_column):
     if group_column not in df.columns:
@@ -40,4 +40,4 @@ def get_top_n(df,column,n=5):
     if not isinstance(n,int) or isinstance(n,bool) or n<=0:
         raise ValueError(f"n必须是正整数")
     top_n=df.sort_values(by=column,ascending=False).head(n)
-    return top_n
+    return top_n.to_dict(orient="records")
